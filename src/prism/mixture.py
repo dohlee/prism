@@ -14,6 +14,8 @@ def trigamma(x):
 
 
 class BetaBinomialMixture():
+    """Beta-binomial mixture model for PRISM core algorithm.
+    """
     def __init__(self, n_components=1, max_iter=10000, tol=1e-3, seed=None, verbose=False):
         self.n_components = n_components
         self.max_iter = max_iter
@@ -146,19 +148,30 @@ class BetaBinomialMixture():
         self.log_likelihood_ = curr_weighted_loglikelihood
 
     def predict_proba(self, n, k):
-        """Returns the posterior probabilities of each data point for each cluster."""
+        """Returns the posterior probabilities of each fingerprint epiloci for each cluster.
+
+        :param list n: Depths of fingerprint epiloci.
+        :param list k: Fingerprint pattern counts of fingerprint epiloci.
+
+        :returns: Posterior probabilities of each fingerprint epiloci.
+        """
         l = np.array([self._bebin_likelihood(n, k, a, b) for a, b in zip(self.alphas_, self.betas_)])
         weighted_likelihood = l * self.pi_.reshape([self.n_components, 1])
         return weighted_likelihood / weighted_likelihood.sum(axis=0)
 
     def _n_parameters(self):
-        """Returns the number of parameters estimated while fitting the model."""
+        """Returns the number of parameters estimated while fitting the model.
+
+        :returns: Number of parameters in the model.
+        """
         return int(2 * self.n_dim * self.n_components + (self.n_components - 1))
 
     def get_weights(self):
         """Returns the list of cluster weights.
         Note that a cluster weight is computed as a sum of posterior probabilities that
         each of the data point will be assiged to that cluster.
+
+        :returns: Cluster weights.
         """
         return self.pi_
 
@@ -167,6 +180,9 @@ class BetaBinomialMixture():
         return np.array([a / (a + b) for a, b in zip(self.alphas_, self.betas_)])
 
     def get_means(self):
+        """
+        :returns: Cluster means.
+        """
         return self.means_
     
     @property
@@ -174,25 +190,43 @@ class BetaBinomialMixture():
         return np.array([1 / (a + b + 1) for a, b in zip(self.alphas_, self.betas_)])
 
     def get_dispersions(self):
+        """
+        :returns: Cluster dispersions.
+        """
         return self.dispersions_
-
-    def aic(self):
-        return -2 * self.log_likelihood_ + 2 * self._n_parameters()
     
     def bic(self):
+        """
+        :returns: Bayesian Information Criterion (BIC) value of the model.
+        """
         return -2 * self.log_likelihood_ + np.log(self.n_data) * self._n_parameters()
 
     def get_n_dimensions(self):
+        """
+        :returns: Number of dimensions.
+        """
         return self.n_dim
 
     def get_n_components(self):
+        """
+        :returns: Number of clusters.
+        """
         return self.n_components
 
     def get_depths(self):
+        """
+        :returns: Depths of fingerprint epiloci used for fitting the model.
+        """
         return self.depths
     
     def get_counts(self):
+        """
+        :returns: Fingerprint pattern counts of fingerprint epiloci used for fitting the model.
+        """
         return self.counts
     
     def get_headers(self):
+        """
+        :returns: Headers of fingerprint epiloci used for fitting the model.
+        """
         return self.headers
