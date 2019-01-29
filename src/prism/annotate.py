@@ -11,6 +11,18 @@ import prism.util as util
 logger = cleanlog.ColoredLogger('annotate')
 
 def scatter_1d(subclone_assignments, num_subclones, depths, fingerprint_fractions, annotation_names, annotation_mask, width, height, dpi):
+    """Generate annotated scatterplot for one-dimensional PRISM analysis.
+
+    :param list subclone_assignments: List containing subclone assignment status for each fingerprint epilocus.
+    :param int num_subclones: Number of subclones.
+    :param list depths: List of depths (pattern counts).
+    :param list fingerprint_fractions: List of fingerprint fractions.
+    :param list annotation_names: List of the names of annotations.
+    :param list annotation_mask: List containing annotation status for each fingerprint epilocus.
+    :param float width: Figure width.
+    :param float height: Figure height.
+    :param int dpi: Figure DPI.
+    """
     fig = plt.figure(figsize=(width, height))
     ax = fig.add_subplot(111)
     ax.grid()
@@ -23,12 +35,27 @@ def scatter_1d(subclone_assignments, num_subclones, depths, fingerprint_fraction
         ax.scatter(
             fingerprint_fractions[mask, 0],
             depths[mask, 0],
-            label=f'S{subclone_index + 1}',
-            s=60, edgecolors='black', linewidth=0.3,
+            s=60, alpha=0.2, linewidth=0,
         )
+    
+    plt.gca().set_prop_cycle(None)
+
+    for name, mask in zip(annotation_names, annotation_mask):
+        ax.scatter(fingerprint_fractions[mask, 0], depths[mask, 0], label=name, marker='x', s=60, lw=1.33)
     
 
 def scatter_2d(subclone_assignments, num_subclones, fingerprint_fractions, annotation_names, annotation_mask, width, height, dpi):
+    """Generate annotated scatterplot for two-dimensional PRISM analysis.
+
+    :param list subclone_assignments: List containing subclone assignment status for each fingerprint epilocus.
+    :param int num_subclones: Number of subclones.
+    :param list fingerprint_fractions: List of fingerprint fractions.
+    :param list annotation_names: List of the names of annotations.
+    :param list annotation_mask: List containing annotation status for each fingerprint epilocus.
+    :param float width: Figure width.
+    :param float height: Figure height.
+    :param int dpi: Figure DPI.
+    """
     fig = plt.figure(figsize=(width, height))
     ax = fig.add_subplot(111)
     ax.grid()
@@ -41,7 +68,7 @@ def scatter_2d(subclone_assignments, num_subclones, fingerprint_fractions, annot
         ax.scatter(
             fingerprint_fractions[mask, 0],
             fingerprint_fractions[mask, 1],
-            s=60, alpha=0.2, linewidth=0
+            s=60, alpha=0.2, linewidth=0,
         )
 
     plt.gca().set_prop_cycle(None)
