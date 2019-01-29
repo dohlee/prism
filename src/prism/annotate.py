@@ -78,7 +78,7 @@ def scatter_2d(subclone_assignments, num_subclones, fingerprint_fractions, annot
 
 def run(input_fp, output_fp, bed_fps, annotation_names, output_figure_fp=None, dpi=400, width=4, height=4, scale=1, font_family=None):
     if len(bed_fps) != len(annotation_names):
-        logger.error(f'The number of bed files and their names should match. (Given {len(bed_fps)} bed files and {len(annotation_names)} names.)')
+        logger.error('The number of bed files and their names should match. (Given %d bed files and %d names.)' % (len(bed_fps), len(annotation_names)))
         
     util.preset_rc(scale=scale, font_family=font_family)
 

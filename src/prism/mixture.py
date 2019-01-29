@@ -115,7 +115,7 @@ class BetaBinomialMixture():
             # Check for convergence.
             if np.abs(curr_weighted_loglikelihood - prev_weighted_loglikelihood) < self.tol:
                 if self.verbose:
-                    logger.debug(f'Met convergence criterion at iteration {iteration}. Terminating.')
+                    logger.debug('Met convergence criterion at iteration %d. Terminating.' % (iteration))
                 self.converged_ = True
                 break
             prev_weighted_loglikelihood = curr_weighted_loglikelihood

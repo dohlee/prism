@@ -173,6 +173,6 @@ def prepare_header_bed(headers):
         start = int(header.split(';')[0].split(':')[1]) - 1  
         end = int(header.split(';')[-1].split(':')[1])
 
-        bed_strings.append(f'{chrom}\t{start}\t{end}')
+        bed_strings.append('%s\t%d\t%d' % (chrom, start, end))
     
     return pb.BedTool('\n'.join(bed_strings), from_string=True)

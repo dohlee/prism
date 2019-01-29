@@ -29,7 +29,7 @@ def scatter_1d(subclone_assignments, num_subclones, depths, fingerprint_fraction
         ax.scatter(
             fingerprint_fractions[mask, 0],
             depths[mask, 0],
-            label=f'S{subclone_index + 1}',
+            label='S%d' % (subclone_index + 1),
             s=60, edgecolors='black', linewidth=0.3,
         )
     
@@ -58,7 +58,7 @@ def scatter_2d(subclone_assignments, num_subclones, fingerprint_fractions, width
         ax.scatter(
             fingerprint_fractions[mask, 0],
             fingerprint_fractions[mask, 1],
-            label=f'S{subclone_index + 1}',
+            label='S%d' % (subclone_index + 1),
             s=60, edgecolors='black', linewidth=0.3,
         )
 

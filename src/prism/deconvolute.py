@@ -293,5 +293,5 @@ def run(input_fps, full_pattern_proportion=0.8, merge_cutoff=0.05, outlier_dispe
         print('\t'.join(headers), file=outFile)
         for header, cluster, subclone, depths, counts in zip(common_headers, cluster_assignments, subclone_assignments, merged_depths, merged_counts):
             ffs = ",".join(map(lambda t: str(t[1] / t[0]), zip(depths, counts)))
-            print(f'{header}\t{cluster}\t{subclone}\t{",".join(map(str, depths))}\t{",".join(map(str, counts))}\t{ffs}', file=outFile)
+            print('%s\t%d\t%d\t%s\t%s\t%s' % (header, cluster, subclone, ",".join(map(str, depths)), ",".join(map(str, counts)), ffs), file=outFile)
     return selected_model
