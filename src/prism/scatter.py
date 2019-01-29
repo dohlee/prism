@@ -7,6 +7,16 @@ import numpy as np
 import prism.util as util
 
 def scatter_1d(subclone_assignments, num_subclones, depths, fingerprint_fractions, width, height, dpi):
+    """Generate annotated scatterplot for one-dimensional PRISM analysis.
+
+    :param list subclone_assignments: List containing subclone assignment status for each fingerprint epilocus.
+    :param int num_subclones: Number of subclones.
+    :param list depths: List of depths (pattern counts).
+    :param list fingerprint_fractions: List of fingerprint fractions.
+    :param float width: Figure width.
+    :param float height: Figure height.
+    :param int dpi: Figure DPI.
+    """
     fig = plt.figure(figsize=(width, height))
     ax = fig.add_subplot(111)
     ax.grid()
@@ -25,6 +35,17 @@ def scatter_1d(subclone_assignments, num_subclones, depths, fingerprint_fraction
     
 
 def scatter_2d(subclone_assignments, num_subclones, fingerprint_fractions, width, height, dpi):
+    """Generate annotated scatterplot for two-dimensional PRISM analysis.
+
+    :param list subclone_assignments: List containing subclone assignment status for each fingerprint epilocus.
+    :param int num_subclones: Number of subclones.
+    :param list fingerprint_fractions: List of fingerprint fractions.
+    :param list annotation_names: List of the names of annotations.
+    :param list annotation_mask: List containing annotation status for each fingerprint epilocus.
+    :param float width: Figure width.
+    :param float height: Figure height.
+    :param int dpi: Figure DPI.
+    """
     fig = plt.figure(figsize=(width, height))
     ax = fig.add_subplot(111)
     ax.grid()
