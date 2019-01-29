@@ -13,7 +13,13 @@ from prism.util import Region
 logger = cleanlog.ColoredLogger('extract')
 
 def extend_region(region, read):
-    """Returns the union of genomic regions covered by given region and read."""
+    """Returns the union of genomic regions covered by given region and read.
+
+    :param Region region: Genomic region to be extended.
+    :param AlignedSegment read: Read used for the extension.
+
+    :returns: Extended genomic region, which is the union of region and read.
+    """
     assert region.reference_name == read.reference_name, \
            f'Unable to extend region. Contigs are incompatible: {region.reference_name} vs {read.reference_name}'
 
@@ -24,7 +30,13 @@ def extend_region(region, read):
 
 
 def has_overlap(region, read):
-    """Returns True if given region and read overlap, otherwise False."""
+    """Returns True if given region and read overlap, otherwise False.
+
+    :param Region region: Genomic region to test overlap. 
+    :param AlignedSegment read: Read to test overlap.
+
+    :returns: True if given region and read overlap, otherwise False.
+    """
     if region.reference_name != read.reference_name:
         return False
 
@@ -34,7 +46,13 @@ def has_overlap(region, read):
     return a0 <= b1 and b0 <= a1
 
 def character_indices(string, characters):
-    """Returns a sorted list of indices of characters in the string."""
+    """Returns a sorted list of indices of characters in the string.
+
+    :param string string: A string where the characters are expected to appear.
+    :param list characters: List of characters to return indices.
+
+    :returns: A list of indices of string where the characters appear.
+    """
     i = []
     for character in characters:
         i.extend([m.start() for m in re.finditer(character, string)])
@@ -42,7 +60,13 @@ def character_indices(string, characters):
     return list(sorted(i))
 
 def get_cpg_coordinates(read, paired=False):
-    """Returns genomic coordinates of cytosines of CpGs in the read."""
+    """Returns genomic coordinates of cytosines of CpGs in the read.
+
+    :param AlignedSegment read: Read to examine for the location of CpGs.
+    :param bool paired: True if the sequencing library is paired, otherwise False.
+
+    :returns: Absolute genomic coordinates of CpGs that appear in the read.
+    """
     start = read.reference_start
     methylation_string = read.get_tag('XM')
 
@@ -68,7 +92,14 @@ def get_cpg_coordinates(read, paired=False):
 
 
 def discard_noninformative_reads(cpgs_reads_dict, depth_cutoff, num_cpg_cutoff):
-    """Discards noninformative reads with low depth or few CpGs."""
+    """Discards noninformative reads with low depth or few CpGs.
+
+    :param dict cpgs_reads_dict: Dictionary mapping a set of CpG coordinates to a group of reads.
+    :param int depth_cutoff: Minimum depth of a group of reads to be retained.
+    :param int num_cpg_cutoff: Mininum number of CpGs appearing in the reads to be retained.
+
+    :returns: Retained (informative) CpG-Read group mapping dictionary.
+    """
     retained = defaultdict(list)
 
     for cpgs, reads in cpgs_reads_dict.items():
@@ -99,6 +130,13 @@ def save_met_file(handle, output_path, depth_cutoff, num_cpg_cutoff, paired, con
     """Read through the bam file and identify group of reads mapped to the same genomic region.
     Group of reads with insufficient depth and insufficient number of CpGs will be discarded.
     NOTE: BAM file should be sorted to guarantee proper generation of MET file.
+
+    :param AlignmentFile handle: pysam AlignmentFile object for BAM file.
+    :param string output_path: Output MET file path.
+    :param int depth_cutoff: Minimum depth for a group of reads to be retained.
+    :param num_cpg_cutoff: Minimum number of CpGs appearing in the reads to be retained.
+    :param bool paired: True if the sequencing library is paired, otherwise False.
+    :param list contigs: A list of contigs to examine.
     """
     out = open(output_path, 'w')
 
