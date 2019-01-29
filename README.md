@@ -1,7 +1,7 @@
 <p align="center"><img src="images/logo_bgwhite.png" /></p>
 <p align="center">Methylation <b>P</b>attern-based, <b>R</b>eference-free <b>I</b>nference of <b>S</b>ubclonal <b>M</b>akeup.</p>
 <p align="center">
-  <a href="https://readthedocs.org/projects/subclone-prism"><img src="https://readthedocs.org/projects/subclone-prism/badge/?style=flat" /></a>
+  <a href="https://subclone-prism.readthedocs.io/en/latest/"><img src="https://readthedocs.org/projects/subclone-prism/badge/?style=flat" /></a>
   <a href="https://pypi.python.org/pypi/"><img src="https://img.shields.io/pypi/v/subclone-prism.svg" /></a>
   <a href="https://travis-ci.org/dohlee/prism"><img src="https://travis-ci.org/dohlee/prism.svg?branch=master" /></a>
 </p>
