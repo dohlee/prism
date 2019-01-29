@@ -51,6 +51,7 @@ def pattern_counters_from_met(fp):
         yield header[1:], pattern_counter
 
 def random_pattern(l, n):
+    """Generate `n` random methylation pattern with length `l`."""
     s = set()
     ps = []
     p = np.random.randint(2, size=l)
@@ -67,14 +68,17 @@ def random_pattern(l, n):
     return np.array(list(ps)).flatten()
 
 def jaccard_similarity(s1, s2):
+    """Compute Jaccard similarity of two sets."""
     s1 = set(s1)
     s2 = set(s2)
     return len(s1 & s2) / len(s1 | s2)
 
 def extract_chromosome(header):
+    """Extract chromosome information for epilocus header."""
     return header.split(';')[0].split(':')[0]
 
 def merge_two_headers(h1, h2):
+    """Union two epiloci headers."""
     chromosome = h1.split(';')[0].split(':')[0]
 
     start1 = int(h1.split(';')[0].split(':')[1])
@@ -86,6 +90,7 @@ def merge_two_headers(h1, h2):
     return '%s:%d;%s:%d' % (chromosome, min(start1, start2), chromosome, max(end1, end2))
 
 def get_common_headers_by_jaccard_similarity(headers1, headers2, cutoff=0.5):
+    """Given two lists of epiloci headers, determine which epiloci are common."""
     common_h1, common_h2, merged_headers = [], [], []
     chr_header1_dict = defaultdict(list)
     chr_header2_dict = defaultdict(list)
@@ -110,6 +115,7 @@ def get_common_headers_by_jaccard_similarity(headers1, headers2, cutoff=0.5):
     return common_h1, common_h2, merged_headers
 
 def preset_rc(scale=1, font_family=None):
+    """Set visually plausible matplotlib rc file."""
     plt.rc('axes', linewidth=1.33, labelsize=14)
     plt.rc('xtick', labelsize=8 * scale)
     plt.rc('ytick', labelsize=8 * scale)
@@ -146,6 +152,7 @@ def preset_rc(scale=1, font_family=None):
     mpl.rcParams['axes.prop_cycle'] = cycler.cycler(color=color_palette)
 
 def parse_result_line(line):
+    """Parse each line in the PRISM result file."""
     fields = line.strip().split()
 
     header = fields[0]
@@ -158,8 +165,7 @@ def parse_result_line(line):
     return header, cluster, subclone, depths, counts, fingerprint_fractions
 
 def prepare_header_bed(headers):
-    """Converts a list of epiloci headers to a BedTool object.
-    """
+    """Converts a list of epiloci headers to a BedTool object."""
     bed_strings = []
     for header in headers:
         chrom = header.split(':')[0]
