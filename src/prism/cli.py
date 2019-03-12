@@ -141,7 +141,7 @@ def preprocess(args):
     argument_float(
         '-a',
         '--merge-cutoff',
-        default=0.5,
+        default=0.05,
         help='Cutoff for the distance from the midpoint of two clusters and (0.5, ..., 0.5) to treat clusters as single subclone.'
     ),
     argument_float(
