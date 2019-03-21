@@ -156,6 +156,8 @@ def preprocess(args):
         default='common',
         help='Method for calling common epiloci when analyzing more than one samples jointly.'
     ),
+    argument_string('-c', '--copynumber', help='Called copy number file.', default=None),
+    argument_string('-p', '--cn-prior', help='Prior for probability of methylation patterns in copy-number-gained segments.', default='random'),
     argument_int('-s', '--seed', default=12345, help='It is recommended to set random seed for reproducibility.'),
     argument_bool('-v', '--verbose', default=False, help='Increase verbosity.'),
 ])
@@ -169,6 +171,8 @@ def deconvolute(args):
         merge_cutoff=args.merge_cutoff,
         outlier_dispersion_cutoff=args.outlier_dispersion_cutoff,
         intersection_method=args.intersection_method,
+        copynumber=args.copynumber,
+        cn_prior=args.cn_prior,
         num_max_cluster=args.num_max_cluster,
         seed=args.seed,
         verbose=args.verbose,
@@ -180,7 +184,7 @@ def deconvolute(args):
     argument_int('-x', '--width', help='Figure width in inches.', default=4),
     argument_int('-y', '--height', help='Figure height in inches.', default=4),
     argument_float('-s', '--scale', help='Figure scale.', default=1),
-    argument_string('-f', '--font-family', help='Font faily used for the plot.', default=None)
+    argument_string('-f', '--font-family', help='Font faily used for the plot.', default=None),
 ])
 def scatter(args):
     """Generate scatterplot showing the fractions of fingerprint patterns.
