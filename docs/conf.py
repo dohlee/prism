@@ -24,9 +24,8 @@ copyright = '2019, Dohoon Lee'
 author = 'Dohoon Lee'
 
 # The short X.Y version
-version = ''
 # The full version, including alpha/beta/rc tags
-release = ''
+version = release = '0.1.0'
 
 
 # -- General configuration ---------------------------------------------------
