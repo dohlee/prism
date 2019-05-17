@@ -9,7 +9,9 @@
 
 <h2 align="center">Prerequisites</h2>
 
-PRISM depends on the mapping result of [Bismark](https://www.bioinformatics.babraham.ac.uk/projects/bismark/), a bisulfite read mapping tool. **Please prepare an alignment file (BAM file) of your reduced representation bisulfite sequencing (RRBS) data with Bismark**. Also note that PRISM only applies to RRBS data, unfortunately, the feasibility of PRISM to the data from other methylation profiling technique such as whole genome bisulfite sequencing (WGBS), methylated DNA immunoprecipitation sequencing (MeDIP-Seq), or methyl-CpG binding domain-based capture sequencing (MBDCap-Seq) has not been verified.
+- **BAM file of RRBS reads, aligned by Bismark.**
+
+PRISM requires the mapping result of [Bismark](https://www.bioinformatics.babraham.ac.uk/projects/bismark/), a bisulfite read mapping tool. Also note that PRISM only applies to RRBS data, and unfortunately, the feasibility of PRISM to the data from other methylation profiling techniques such as whole genome bisulfite sequencing (WGBS), methylated DNA immunoprecipitation sequencing (MeDIP-Seq), or methyl-CpG binding domain-based capture sequencing (MBDCap-Seq) has not been verified.
 
 <h2 align="center">Installation</h2>
 
@@ -19,13 +21,44 @@ PRISM can be installed via PyPI.
 pip install subclone-prism
 ```
 
+<h2 align="center">Documentation</h2>
+
+Simple quick-start usage can be found below. If your are interested, please refer to the [full documentation](https://subclone-prism.readthedocs.io/en/latest/).
+
 <h2 align="center">Usage</h2>
 
 ![](images/workflow.png)
 
 The PRISM analysis is done in three steps: `extract` - `preprocess` - `deconvolute`.
 
+## Quickstart
+
+```bash
+# Extract epiloci from BAM file.
+prism extract -i sample.bam -o sample.met
+
+# Preprocess epiloci to get finer estimates of epigenetic subclones
+# and to increase the number of fingerprint epiloci.
+prism preprocess -i sample.met -o sample.corrected.met
+
+# Infer the subclonal composition of the sample.
+# 1-sample deconvolution.
+prism deconvolute -i sample.corrected.met -o sample.prism.result
+# 2-sample deconvolution.
+prism deconvolute -i sample1.corrected.met sample2.corrected.met -o sample.prism.result
+
+# Scatterplot for visualization of the result.
+prism scatter -i sample.prism.result -o sample.png
+
+# Annotation of fingerprint epiloci for functional characterization of
+# discovered epigenetic subclones.
+prism annotate -i sample.prism.result -o sample.prism.annotated.result \
+--beds annotation_a.bed annotation_b.bed \
+--annotation-names ANNOTATION-A ANNOTATION-B
+```
+
 ## extract
+
 `prism extract` command extracts viable epiloci from a BAM file.
 In other words, it extracts genomic regions harboring a sufficient number of mapped reads (>= d) with a sufficient number of CpGs (>= c).
 A resulting file with those epiloci information is generated, whose file extension will be `.met` afterwards.
@@ -46,6 +79,7 @@ Also, you should use `-x/--paired` option to inform PRISM that you are using pai
 For a more detailed description about all options, run `prism extract -h`.
 
 ## preprocess
+
 `prism preprocess` command corrects for the errors in methylation patterns in order to amplify the number of *fingerprint epiloci* and calibrate for the subclone size estimates.
 
 ```bash
@@ -70,6 +104,7 @@ prism preprocess -i sample.met -o sample.corrected.met --no-prefilter -t 30
 For a more detailed description about all options, run `prism preprocess -h`.
 
 ## deconvolute
+
 `prism deconvolute` command infers the subclonal composition of the sample. Simply give methylation pattern-corrected epiloci file.
 
 ```bash
@@ -86,6 +121,7 @@ For a more detailed description about all options, run `prism deconvolute -h`.
 
 
 ## scatter
+
 `prism scatter` command generates a scatterplot of the PRISM analysis result. 
 You need a result of `prism deconvolute`.
 The dimension of anlaysis (i.e., the number of samples you gave to `prism deconvolute` command) should not be more than three to visualize it.
@@ -95,9 +131,10 @@ Note that the file extension of output file should be a general one for image fi
 prism scatter -i sample.prism.result -o sample.png
 ```
 
-![](images/scatter.png)
+<p align="center"><img src="images/scatter.png" width="66%" height="66%"></p>
 
 ## annotate
+
 `prism annotate` command does functional annotation of the PRISM analysis result.
 It requires collections of genomic intervals as BED files. Give one or more BED file to `prism annotate`, with representative annotation term for each BED file.
 Basically it generates annotated result, with an additional column having comma-separated terms that the epiloci is annotated to.
@@ -118,4 +155,4 @@ Also, scatterplots with annotation can be generated with `--figure` option.
 prism annotate -i sample.prism.reslt -o sample.prism.annotated.result --beds annotation_a.bed annotation_b.bed --annotation-names ANNOTATION-A ANNOTATION-B --figure sample.prism.annotated.png
 ```
 
-![](images/annotate.png)
+<p align="center"><img src="images/annotate.png" width="66%" height="66%"></p>
