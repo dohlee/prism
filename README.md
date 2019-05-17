@@ -1,5 +1,5 @@
 <p align="center"><img src="images/logo_bgwhite.png" /></p>
-<p align="center">Methylation <b>P</b>attern-based, <b>R</b>eference-free <b>I</b>nference of <b>S</b>ubclonal <b>M</b>akeup. (vv1.0.0.)</p>
+<p align="center">Methylation <b>P</b>attern-based, <b>R</b>eference-free <b>I</b>nference of <b>S</b>ubclonal <b>M</b>akeup. (v1.0.0)</p>
 <p align="center">
   <a href="https://subclone-prism.readthedocs.io/en/latest/"><img src="https://readthedocs.org/projects/subclone-prism/badge/?style=flat" /></a>
   <a href="https://pypi.python.org/pypi/"><img src="https://img.shields.io/pypi/v/subclone-prism.svg" /></a>
