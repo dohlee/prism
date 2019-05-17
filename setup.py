@@ -25,7 +25,7 @@ def read(*names, **kwargs):
 
 setup(
     name='subclone-prism',
-    version='0.1.0',
+    version='1.0.0',
     license='MIT license',
     description='Methylation Pattern-based, Reference-free Inference of Subclonal Makeup',
     # long_description='%s\n%s' % (
