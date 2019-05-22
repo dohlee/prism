@@ -1,13 +1,9 @@
-import argparse
-import pysam
 import cleanlog
 import re
-import sys
-import os
 
 import prism.util as util
 
-from collections import namedtuple, defaultdict, Counter
+from collections import defaultdict, Counter
 from prism.util import Region
 
 logger = cleanlog.ColoredLogger('extract')
@@ -21,7 +17,7 @@ def extend_region(region, read):
     :returns: Extended genomic region, which is the union of region and read.
     """
     assert region.reference_name == read.reference_name, \
-           'Unable to extend region. Contigs are incompatible: %s vs %s' % (region.reference_name, read_reference_name)
+           'Unable to extend region. Contigs are incompatible: %s vs %s' % (region.reference_name, read.reference_name)
 
     new_start = min(region.reference_start, read.reference_start)
     new_end = max(region.reference_end, read.reference_end)

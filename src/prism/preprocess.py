@@ -4,7 +4,6 @@ import prism.proofreading as proofreading
 import multiprocessing as mp
 import numpy as np
 
-from collections import Counter
 from io import StringIO
 
 logger = cleanlog.ColoredLogger('preprocess')

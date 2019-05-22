@@ -1,8 +1,5 @@
-import cycler
-import sys
 import cleanlog
 
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 import pybedtools as pb

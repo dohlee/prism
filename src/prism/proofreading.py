@@ -1,15 +1,9 @@
 from prism.hmm import HMMModel
-from collections import Counter
 
 import numpy as np
-import multiprocessing as mp
 import prism.util as util
 
-import random
 import cleanlog
-import glob
-import os
-import sys
 
 logger = cleanlog.ColoredLogger('insillico-proofreading')
 PSEUDO_COUNT = 1
