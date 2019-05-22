@@ -1,19 +1,38 @@
-PRISM Documentation
-=================================
+PRISM
+=====
+
+Methylation **P**\attern-based, **R**\eference-free **I**\nference of **S**\ubclonal **M**\akeup.
+
 .. image:: _images/logo_bgwhite.png
     :align: center
 
-Methylation **P**\attern-based, **R**\eference-free **I**\nference of **S**\ubclonal **M**\akeup
+.. toctree::
+    :caption: Getting started
+    :maxdepth: 1
+    :hidden:
+
+    getting_started/index
 
 .. toctree::
-   :maxdepth: 3
-   :caption: Contents:
+    :caption: Using PRISM
+    :maxdepth: 2
+    :hidden:
 
-   source/prism
+    usage/index
 
-Indices and tables
-==================
+.. toctree::
+    :caption: Related information
+    :maxdepth: 2
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+    related/index
+    
+.. include:: usage/quickstart.rst
+
+Example pipeline
+================
+
+`snakemake` pipeline
+--------------------
+
+LICENSE
+=======
