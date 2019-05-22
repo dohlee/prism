@@ -1,9 +1,10 @@
-import cleanlog
 import re
+from collections import Counter
+from collections import defaultdict
+
+import cleanlog
 
 import prism.util as util
-
-from collections import defaultdict, Counter
 from prism.util import Region
 
 logger = cleanlog.ColoredLogger('extract')

@@ -1,10 +1,11 @@
-import cleanlog
-import prism.util as util
-import prism.proofreading as proofreading
 import multiprocessing as mp
+from io import StringIO
+
+import cleanlog
 import numpy as np
 
-from io import StringIO
+import prism.proofreading as proofreading
+import prism.util as util
 
 logger = cleanlog.ColoredLogger('preprocess')
 

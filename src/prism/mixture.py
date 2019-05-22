@@ -1,9 +1,7 @@
-import numpy as np
-
 import cleanlog
-
-from scipy.special import gammaln as logG
+import numpy as np
 from scipy.special import digamma
+from scipy.special import gammaln as logG
 from scipy.special import polygamma
 from sklearn.mixture import GaussianMixture
 

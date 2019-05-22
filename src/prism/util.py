@@ -1,12 +1,14 @@
-import pysam
-import cycler
+from collections import Counter
+from collections import defaultdict
+from collections import namedtuple
 
-import numpy as np
-import pybedtools as pb
+import cycler
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import numpy as np
+import pybedtools as pb
+import pysam
 
-from collections import namedtuple, Counter, defaultdict
 
 class Region(namedtuple('Region', ['reference_name', 'reference_start', 'reference_end'])):
     def __new__(cls, reference_name, reference_start, reference_end):

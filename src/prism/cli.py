@@ -16,11 +16,11 @@ Why does this file exist, and why not put this in __main__?
 """
 import argparse
 
-import prism.extract
+import prism.annotate
 import prism.deconvolute
+import prism.extract
 import prism.preprocess
 import prism.scatter
-import prism.annotate
 
 # Create the top-level parser.
 parser = argparse.ArgumentParser(description='Decompose a bulk sample into putative epigenetic subclones.')

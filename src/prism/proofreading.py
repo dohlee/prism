@@ -1,9 +1,8 @@
-from prism.hmm import HMMModel
-
-import numpy as np
-import prism.util as util
-
 import cleanlog
+import numpy as np
+
+import prism.util as util
+from prism.hmm import HMMModel
 
 logger = cleanlog.ColoredLogger('insillico-proofreading')
 PSEUDO_COUNT = 1

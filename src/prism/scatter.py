@@ -3,6 +3,7 @@ import numpy as np
 
 import prism.util as util
 
+
 def scatter_1d(subclone_assignments, num_subclones, depths, fingerprint_fractions, width, height, dpi):
     """Generate annotated scatterplot for one-dimensional PRISM analysis.
 

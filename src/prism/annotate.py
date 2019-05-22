@@ -1,8 +1,8 @@
 import cleanlog
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pybedtools as pb
+
 import prism.util as util
 
 logger = cleanlog.ColoredLogger('annotate')

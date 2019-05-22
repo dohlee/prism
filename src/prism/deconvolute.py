@@ -1,10 +1,11 @@
-from prism.mixture import BetaBinomialMixture
 from collections import Counter
 from itertools import tee
 
-import numpy as np
-import prism.util as util
 import cleanlog
+import numpy as np
+
+import prism.util as util
+from prism.mixture import BetaBinomialMixture
 
 logger = cleanlog.ColoredLogger('deconvolute')
 
