@@ -23,16 +23,8 @@ Methylation **P**\attern-based, **R**\eference-free **I**\nference of **S**\ubcl
 .. toctree::
     :caption: Related information
     :maxdepth: 2
+    :hidden:
 
     related/index
     
 .. include:: usage/quickstart.rst
-
-Example pipeline
-================
-
-`snakemake` pipeline
---------------------
-
-LICENSE
-=======
