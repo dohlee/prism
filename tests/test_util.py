@@ -15,10 +15,10 @@ def test_jaccard_similarity():
 
 def test_region_fail_because_of_invalid_region():
     with pytest.raises(ValueError):
-        r = util.Region('chr1', 20, 10)
+        util.Region('chr1', 20, 10)
     
     with pytest.raises(ValueError):
-        r = util.Region('chr1', 10, 10)
+        util.Region('chr1', 10, 10)
 
 def test_region_string():
     r = util.Region('chr1', 10, 20)
