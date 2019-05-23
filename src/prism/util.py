@@ -12,7 +12,9 @@ import pysam
 
 class Region(namedtuple('Region', ['reference_name', 'reference_start', 'reference_end'])):
     def __new__(cls, reference_name, reference_start, reference_end):
-        assert reference_start <= reference_end, 'Invalid genomic region %s:%d-%d.' % (reference_name, reference_start, reference_end)
+        if reference_start >= reference_end:
+            raise ValueError('Invalid genomic region %s:%d-%d.' % (reference_name, reference_start, reference_end))
+
         return super(Region, cls).__new__(cls, reference_name, reference_start, reference_end)
 
     def __str__(self):
